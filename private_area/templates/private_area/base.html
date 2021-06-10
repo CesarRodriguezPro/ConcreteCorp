@@ -21,7 +21,7 @@
        {% include 'private_area/components/sidebar.html' %}
        <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
-                {% include 'private_area/components/top_bar.html' %}
+                {% include 'private_area/top_bar/top_bar.html' %}
                 {% block content %}
                 {% endblock %}
             </div>
@@ -29,7 +29,7 @@
         </div>
        {% include 'private_area/components/button_up.html' %}
     </div>
-    {% include 'private_area/components/logout.html' %}
+    {% include 'private_area/top_bar/logout.html' %}
 
     <script src="{% static 'private_area/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'private_area/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>

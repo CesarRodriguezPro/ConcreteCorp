@@ -15,7 +15,7 @@
 </head>
 
 <body class="bg-gradient-primary">
-
+    {% include 'components/messages_snip.html' with messages=messages %}
     {% block content %} {% endblock %}
 
     <script src="{% static 'private_area/vendor/jquery/jquery.min.js' %}"></script>

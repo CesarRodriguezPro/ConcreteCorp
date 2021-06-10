@@ -12,7 +12,7 @@ class OwnerCreateForm(UserCreationForm):
 
 class EmployeesCreateForm(UserCreationForm):
     class Meta:
-        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'image')
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2', 'image', )
         model = User
 
 
