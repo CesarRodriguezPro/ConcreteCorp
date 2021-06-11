@@ -1,0 +1,35 @@
+{% extends 'private_area/base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <ul>
+            {% for item in events %}
+                <li> {{item}}</li>
+            {% endfor%}
+            </ul>
+        </div>
+        <div class="col">
+            <ul>
+            {% for item in errors %}
+                <li> {{item}}</li>
+            {% endfor%}
+            </ul>
+        </div>
+        <div class="col">
+            <ul>
+            {% for item in logins %}
+                <li> {{item}}</li>
+            {% endfor%}
+            </ul>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

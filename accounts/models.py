@@ -6,7 +6,7 @@ class User(AbstractUser):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics', null=True, blank=True)
 
     def __str__(self):
-        return f"@{self.username}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Owner(models.Model):

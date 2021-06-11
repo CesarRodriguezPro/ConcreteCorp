@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import OwnerCreateForm, EmployeesCreateForm, CompaniesCreateForm
+from .forms import EmployeesCreateForm
 from django.contrib import messages
-from .models import User
+from .models import User, Owner, Companies, Employee
 from django.views.generic import View, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.password_validation import password_validators_help_texts, validate_password
+from system_log.models import LoginEvent
 
 
 class LoginView(View):
@@ -26,30 +28,41 @@ class LoginView(View):
 
 class RegistrationOwner(View):
 
+    context = {
+        "is_owner": True,
+        'help_text': password_validators_help_texts(),
+    }
+
     def get(self, request):
-        context = {
-            "is_owner": True
-        }
-        return render(request, "accounts/register.html", context)
+        return render(request, "accounts/register.html", self.context)
 
     def post(self, request):
 
-        ## working in this area.
         username = request.POST['username']
         password = request.POST['password']
         repeat_password = request.POST['repeatPassword']
+        first_name = request.POST['firstName']
+        last_name = request.POST['lastName']
+        email = request.POST['email']
+        company_name = request.POST['company_name']
+        company_address = request.POST['address']
 
-        if password == repeat_password:
-
-            owner = User.objects.get(username=user_form.cleaned_data['username'])
-            company_.owner = owner
-            company_.save()
-
-            messages.success(request, f'Your Account has been Created! You are now able to log in')
+        if password and repeat_password and password == repeat_password:
+            user = User(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
+            user.save()
+            owner = Owner(profile=user)
+            owner.save()
+            company = Companies(owner=owner, company_name=company_name, address=company_address)
+            company.save()
+            messages.success(request, 'Your Account has been Created! You are now able to log in')
             return redirect("accounts:login")
+
+        messages.error(request, 'Password Do Not Match')
+        return render(request, "accounts/register.html", self.context)
 
 
 class RegistrationEmployee(LoginRequiredMixin, View):
+
     def get(self, request):
         user_form = EmployeesCreateForm()
         context = {

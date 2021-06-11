@@ -15,15 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+
+import system_log.views
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+import system_log.views as system_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('public_area.urls', namespace='public_area')),
     path('user_area/', include('private_area.urls', namespace='private_area')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
+    path('system_log/', system_views.Home.as_view(), name='home'),
+
 ]
 
 if settings.DEBUG:
