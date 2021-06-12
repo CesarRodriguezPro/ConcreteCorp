@@ -4,3 +4,5 @@
 DjangoEnv
 db.sqlite3
 .idea
+venv
+api_key.py

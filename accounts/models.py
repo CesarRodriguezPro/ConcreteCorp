@@ -12,6 +12,9 @@ class User(AbstractUser):
 class Owner(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.profile.first_name} {self.profile.last_name}"
+
 
 class Companies(models.Model):
     owner = models.ForeignKey(to=Owner, on_delete=models.CASCADE)
