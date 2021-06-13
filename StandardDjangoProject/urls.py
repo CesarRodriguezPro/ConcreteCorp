@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('public_area.urls', namespace='public_area')),
     path('user_area/', include('private_area.urls', namespace='private_area')),
+    path('api/', include('mobile.urls', namespace='api')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('system_log/', system_views.Home.as_view(), name='home'),
 ]

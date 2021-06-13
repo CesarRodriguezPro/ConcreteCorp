@@ -43,7 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'api'
     'crispy_forms',
+
+    #  Apps
     'accounts',
     'public_area',
     'private_area',
